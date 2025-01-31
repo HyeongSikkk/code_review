@@ -1,0 +1,22 @@
+.description {
+    margin-bottom: 24px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.code_review-link {
+    background-color: red;
+    text-decoration: none;
+    font: 12px;
+    font-weight: bolder;
+    color: yellow;
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.code_review-link:hover {
+    background-color: rgb(255, 163, 163);
+}

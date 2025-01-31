@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css')}}">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <navbar>
+            <div class="border">
+                <a href="{{ url_for('index') }}" class="home">코드 리뷰</a>
+            </div>
+        </navbar>
+        <div class="content">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>

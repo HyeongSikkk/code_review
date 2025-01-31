@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: #dce2dc;
+}
+
+navbar {
+    background-color: #c6cac6;
+    padding: 5px 20px;
+    display: block;
+}
+
+.border {
+    margin: 10px 0;
+}
+
+.home {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 3px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.home:hover {
+    background-color: rgb(116, 116, 240);
+}
+
+.content {
+    width: 87%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+}
+.content::after {
+    content: "";
+    display: block;
+    clear: both;
+}
