@@ -24,12 +24,8 @@ def index() :
 def code_review() :
     if request.method == "GET" :
         form= CodeReviewForm()
-        print("code_review, GET")
         return render_template("code_review.html", form=form, do_print=False)
     elif request.method == "POST" :
         form= CodeReviewForm(request.form)
         result= get_the_url(form.data)
-        print("code_review, POST")
-        print(result.page)
-        print(result.code)
         return render_template("code_review.html",form= form, do_print=True, result= result)
