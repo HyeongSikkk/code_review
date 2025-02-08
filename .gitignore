@@ -1,2 +1,4 @@
 */__pycache__/
-venv/
+backend/venv/
+backend/backend/settings.py
+backend/backend/.env
