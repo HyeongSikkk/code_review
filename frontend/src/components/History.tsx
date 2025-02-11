@@ -3,9 +3,8 @@ interface Props {
     name: String;
 }
 
-function History({type=1, name="history"}: Props){
-    var historyType= type === 1 ? "solve" : "optim";
-    var tagName = "history " + historyType;
+function History({name="history"}: Props){
+    var tagName = "history "
     return (
         <>
             <p className={tagName}>{ name }</p>
