@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import '../styles/review.css';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { Editor } from 'primereact/editor';
 import UrlOrFileUploader from '../components/UrlOrFileUploader';
 import StepSelector from '../components/StepSelector';
 import Chatbot from '../components/Chatbot';
+import CodeEditor from '../components/CodeEditor';
 
 
 const ReviewPage: React.FC = () => {
@@ -32,15 +32,10 @@ const ReviewPage: React.FC = () => {
       {/* ✅ 코드 입력과 결과를 가로로 배치 */}
       <div className="code-container" style={{ display: "flex" }}>
         {/* 코드 입력 (왼쪽) */}
-        <Card className="code-input">
+        <Card className="code-input" style={{ flex: 1, minWidth: "400px" }}>
           <h3>Enter Your Code</h3>
-          <Editor 
-            value={code} 
-            onTextChange={(e) => setCode(e.htmlValue || '')} 
-            style={{ height: '200px' }} 
-          />
+          <CodeEditor code={code} setCode={setCode} /> {/* ✅ Props 추가 */}
         </Card>
-
         {/* 코드 출력 (오른쪽) */}
         <Card className="code-output">
           <h3>Review Result</h3>
