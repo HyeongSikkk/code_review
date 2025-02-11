@@ -3,7 +3,7 @@ import '../styles/homepage.css';
 
 const Homepage: React.FC = () => {
   return (
-    <div>여긴 뭐지?</div>
+    <div>Start!</div>
   );
 };
 

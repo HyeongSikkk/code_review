@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
-// import './TabViewDemo.css';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import Chatbot from './Chatbot';
 
 export default function BasicDemo() {
     return (
@@ -12,7 +12,8 @@ export default function BasicDemo() {
                 <Accordion activeIndex={0}>
                     <AccordionTab header="tittle I">
                         <p className="m-0">
-                            content1
+                            content 1 
+                            <Chatbot />
                         </p>
                     </AccordionTab>
                     <AccordionTab header="tittle II">
@@ -28,7 +29,7 @@ export default function BasicDemo() {
                 </Accordion>
                 </div>
                 </TabPanel>
-                
+
                 <TabPanel header="모범답안">
                     <p className="m-0">
                         solution
