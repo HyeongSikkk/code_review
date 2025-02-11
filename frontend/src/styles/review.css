@@ -1,0 +1,62 @@
+/* ✅ 리뷰 페이지 전체 레이아웃 */
+.review-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 화면 전체 높이 유지 */
+    overflow: hidden; /* 스크롤 제거 */
+    flex-grow: 1; /* 내부 요소들이 올바르게 배치될 수 있도록 설정 */
+  }
+  
+  .review-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .review-input1{
+    display: flex;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  /* ✅ 코드 입력 & 출력을 가로로 배치 */
+  .review-container {
+    display: flex !important;
+    flex-direction: row !important; /* 강제 가로 배치 */
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 900px;
+    gap: 20px;
+    flex-grow: 1;
+  }
+  
+  .code-input, .code-output {
+    flex: 1; /* 동일한 크기로 설정 */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    min-height: 250px;
+  }
+  
+  /* ✅ 코드 검사 버튼을 맨 아래 중앙에 배치 */
+  .review-button {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  /* ✅ 사이드바 토글 버튼 위치 조정 */
+  .sidebar-toggle-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
