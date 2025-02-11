@@ -3,33 +3,43 @@ import { Card } from 'primereact/card';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import '../styles/login.css';
+import LoginApi from "../api/LoginApi.tsx";
+
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate= useNavigate();
 
-  const handleLogin = () => {
-    console.log('Logging in with:', username, password);
-    // TODO: 백엔드 API와 연동하여 로그인 처리
-  };
+  const handleLogin = async () => {
+    console.log("Logging in with:", email, password);
+
+    const result = await LoginApi({ email, password });
+
+    if (result === "success") {
+        navigate("/");  // ✅ 로그인 성공 시 이동
+    } else {
+        alert(result);  // 로그인 실패 메시지 출력
+    }
+};
 
   return (
     <div className="login-container">
       <Card className="login-card">
         <h2>Login</h2>
         <div className="p-field">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">email</label>
           <InputText 
-            id="username" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
+            id="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
             className="p-inputtext-lg" 
-            placeholder="Enter your username"
+            placeholder="Enter your email"
           />
         </div>
         <div className="p-field">
