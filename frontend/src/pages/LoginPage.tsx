@@ -20,18 +20,13 @@ const LoginPage: React.FC = () => {
     console.log("Logging in with:", email, password);
 
     const result = await LoginApi({ email, password });
-
-    if (result === "success") {
-        navigate("/");  // ✅ 로그인 성공 시 이동
-    } else {
-        alert(result);  // 로그인 실패 메시지 출력
-    }
+    navigate("/review", { state: { userId: result.data.user_id } });
 };
 
   return (
     <div className="login-container">
       <Card className="login-card">
-        <h2>Login</h2>
+        <h1>Login</h1>
         <div className="p-field">
           <label htmlFor="email">email</label>
           <InputText 

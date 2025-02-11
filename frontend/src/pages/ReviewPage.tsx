@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from "react-router-dom";
 import '../styles/review.css';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
@@ -11,6 +12,8 @@ import Chatbot from '../components/Chatbot';
 const ReviewPage: React.FC = () => {
   const [code, setCode] = useState<string>(''); // 코드 입력 상태
   const [reviewResult, setReviewResult] = useState<string | null>(null); // 코드 리뷰 결과
+  const location = useLocation();
+  const userId = location.state?.userId;
 
   // 코드 리뷰 실행
   const handleReview = () => {
@@ -20,6 +23,7 @@ const ReviewPage: React.FC = () => {
 
   return (
     <div className="review-page">
+      <h3>{ userId }</h3>
       <div className='review-input1'>
         <div className='url-input'>
           <UrlOrFileUploader />
