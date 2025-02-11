@@ -63,7 +63,7 @@
 /* 챗봇 관련 스타일 */
 /* 챗봇 버튼 */
 .chatbot-button {
-position: fixed;
+/* position: fixed; */
 bottom: 20px;
 right: 20px;
 z-index: 1000;
