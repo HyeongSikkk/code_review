@@ -44,9 +44,8 @@ def login(request):
         
         # JWT 토큰을 포함한 응답 반환
         return Response({
-            'message': 'Login successful',
-            'access': str(refresh.access_token),
-            'refresh': str(refresh),
+            "message": "login success",
+            "user_id" : user.id,
         }, status=status.HTTP_200_OK)
     else:
         return Response({"message": "Login Failed"}, status=status.HTTP_400_BAD_REQUEST)

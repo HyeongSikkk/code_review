@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ReviewPage from './pages/ReviewPage';
 import LoginLayout from './layouts/LoginLayout';
+import RegisterPage from './pages/RegisterPage';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,9 @@ const App: React.FC = () => {
         
         {/* ReviewPage - ReviewLayout 사용 */}
         <Route path="/review" element={<ReviewLayout><ReviewPage /></ReviewLayout>} />
+        
+        {/* 임시 회원가입 */}
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
   );
