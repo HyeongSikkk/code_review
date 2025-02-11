@@ -5,16 +5,18 @@ import { ScrollPanel } from "primereact/scrollpanel";
 import { Button } from "primereact/button";
 
 const Chatbot: React.FC = () => {
-  const [chatOpen, setChatOpen] = useState<boolean>(false); // 챗봇 토글 상태
-  const [chatMessages, setChatMessages] = useState<{ sender: string; text: string }[]>([]); // 채팅 메시지 상태
-  const [userInput, setUserInput] = useState<string>(""); // 사용자 입력 상태
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [chatOpen, setChatOpen] = useState<boolean>(false);
+  const [chatMessages, setChatMessages] = useState<{ sender: string; text: string }[]>([]);
+  const [userInput, setUserInput] = useState<string>("");
+  const scrollRef = useRef<any>(null); // ✅ useRef의 타입을 any로 변경
 
   // 스크롤을 최신 메시지로 이동
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
+    setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.getContent().scrollTop = scrollRef.current.getContent().scrollHeight;
+      }
+    }, 100); // ✅ setTimeout을 사용하여 렌더링 이후 실행
   }, [chatMessages]);
 
   const sendMessage = () => {
@@ -24,7 +26,6 @@ const Chatbot: React.FC = () => {
     setChatMessages(newMessages);
     setUserInput("");
 
-    // 챗봇 응답 (추후 백엔드 연결 가능)
     setTimeout(() => {
       setChatMessages((prevMessages) => [
         ...prevMessages,

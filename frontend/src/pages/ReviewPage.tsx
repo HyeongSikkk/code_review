@@ -6,7 +6,8 @@ import { Editor } from 'primereact/editor';
 import UrlOrFileUploader from '../components/UrlOrFileUploader';
 import StepSelector from '../components/StepSelector';
 import Chatbot from '../components/Chatbot';
-
+import { useLocation } from "react-router-dom";
+import Feedback from '../components/Feedback';
 
 const ReviewPage: React.FC = () => {
   const [code, setCode] = useState<string>(''); // 코드 입력 상태
@@ -18,10 +19,15 @@ const ReviewPage: React.FC = () => {
     setReviewResult('✔ Code is clean and optimized! ✅'); // TODO: 백엔드 API 연동 예정
   };
 
+  const location = useLocation();
+  const userId = location.state?.userId || localStorage.getItem("user_id"); // ✅ state 없으면 localStorage에서 가져오기
+
+
   return (
     <div className="review-page">
       <div className='review-input1'>
         <div className='url-input'>
+          <p>로그인한 사용자 ID: {userId}</p> {/* 제대로 됐는지 적용 시험용*/}
           <UrlOrFileUploader />
         </div>
         <div className='step-input'>
@@ -43,8 +49,7 @@ const ReviewPage: React.FC = () => {
 
         {/* 코드 출력 (오른쪽) */}
         <Card className="code-output">
-          <h3>Review Result</h3>
-          <p>{reviewResult ? reviewResult : "Run code review to see results."}</p>
+          <Feedback />
         </Card>
       </div>
 
