@@ -23,7 +23,6 @@ const ReviewPage: React.FC = () => {
 
   return (
     <div className="review-page">
-      <h3>{ userId }</h3>
       <div className='review-input1'>
         <div className='url-input'>
           <UrlOrFileUploader />

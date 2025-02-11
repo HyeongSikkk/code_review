@@ -4,6 +4,7 @@ from datetime import datetime
 
 # Create your models here.
 class Problem(models.Model) :
+    name= models.CharField(max_length=20)
     title= models.CharField(max_length=20)
     content= models.TextField()
     
@@ -12,12 +13,17 @@ class History(models.Model) :
     problem_id= models.ForeignKey(Problem, on_delete=models.CASCADE)
     name= models.CharField(max_length=15)
     type= models.SmallIntegerField()
+    source_code= models.TextField()
     created_at= models.DateTimeField(default=datetime.now())
+    is_deleted= models.BooleanField(default=False)
 
-class Feedback(models.Model) :
+class Review(models.Model) :
     history_id= models.ForeignKey(History, on_delete=models.CASCADE)
     title= models.CharField(max_length=50)
     content= models.TextField()
     start_line= models.SmallIntegerField()
     end_line= models.SmallIntegerField()
-    
+
+class Solution(models.Model) :
+    history_id= models.ForeignKey(History, on_delete=models.CASCADE)
+    solution_code= models.TextField()

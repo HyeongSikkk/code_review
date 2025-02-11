@@ -12,12 +12,13 @@ interface Props {
 }
 
 function HistoryTab({ data }: Props) {
+    console.log(data);
     return (
         <Accordion activeIndex={0}>
             {Object.keys(data).map((key) => (
                 <AccordionTab key={key} header={key}>
                     {data[key].map((historyRow, index) => (
-                        <History key={index} type={historyRow.type} name={historyRow.name} />
+                        <History key={index} name={historyRow.name} />
                     ))}
                 </AccordionTab>
             ))}

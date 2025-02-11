@@ -20,7 +20,11 @@ const LoginPage: React.FC = () => {
     console.log("Logging in with:", email, password);
 
     const result = await LoginApi({ email, password });
-    navigate("/review", { state: { userId: result.data.user_id } });
+    // review에 
+    navigate("/review", { state: { 
+      userId: result.data.user_id,
+      histories: result.data.histories,
+    } });
 };
 
   return (

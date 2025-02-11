@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 # Create your models here.
-class AlgoRiviewUser(AbstractUser):
+class AlgoReviewUser(AbstractUser):
     # id는 gpt에 의하면, 알아서 생성되는 필드라고 한다.
     # id= models.AutoField(primary_key=True) 
     email= models.EmailField(unique=True)
