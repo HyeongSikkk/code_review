@@ -10,9 +10,10 @@ export default function BasicDemo({ children }) {
 
             <Sidebar visible={visible} onHide={() => setVisible(false)}>
                 <h2>Sidebar</h2>
-                <p>
+                { children }
+                {/* <p>
                     { children }
-                </p>
+                </p> */}
             </Sidebar>
             <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
         </div>

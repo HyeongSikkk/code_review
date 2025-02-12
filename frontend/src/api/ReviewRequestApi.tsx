@@ -1,6 +1,7 @@
 import axios from "axios";
+import BaseApi from "BaseApi.tsx";
 
-const API_URL = "http://222.100.174.159:25565/api/v1/review";
+const url = "/v1/review";
 // https://virtserver.swaggerhub.com/TNSTKD98/Algo_Reivew/1.0.0/api/v1/review
 // http://222.100.174.159:25565/api/v1/review
 

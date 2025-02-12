@@ -21,10 +21,12 @@ const LoginPage: React.FC = () => {
     const result = await LoginApi({ email, password });
     // ✅ 로그인 정보 저장 (예: localStorage, 상태관리 라이브러리)
     localStorage.setItem("user_id", result.user_id);
-    // review에 
+    const historiesArray = Object.entries(result.histories).reverse();
+
+    // review에 스테이트값 전달
     navigate("/review", { state: { 
       userId: result.user_id,
-      histories: result.histories,
+      histories: historiesArray,
     } });
 };
 

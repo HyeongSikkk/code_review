@@ -12,7 +12,8 @@ from .input_source_precessing import get_the_url, get_info_img
 
 def get_histories(user_id) :
     # 히스토리 불러오는 코드 부분, review app에 분리해야할 부분으로 생각되어짐, 일단 구현
-    histories = History.objects.filter(user_id=user_id).values('id', 'problem_id', 'name', 'created_at').order_by("created_at")
+    histories = History.objects.filter(user_id=user_id).values('id', 'problem_id', 'name', 'created_at').order_by("-created_at")
+    print(histories)
     problem_dict_history_list= {}
     for history in histories :
     # 문제 아이디
