@@ -1,5 +1,5 @@
 import axios from "axios";
-import BaseApi from "BaseApi.tsx";
+import BaseApi from "./BaseApi.tsx";
 
 const url = "/v1/review";
 // https://virtserver.swaggerhub.com/TNSTKD98/Algo_Reivew/1.0.0/api/v1/review
@@ -8,7 +8,7 @@ const url = "/v1/review";
 // ✅ 코드 리뷰 요청 (POST 요청을 한 번만 실행)
 export const sendReviewRequest = async (data: any) => {
   try {
-    const response = await axios.post(API_URL, data, {
+    const response = await BaseApi.post(url, data, {
       headers: { "Content-Type": "application/json" },
     });
 
