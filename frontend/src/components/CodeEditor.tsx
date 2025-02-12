@@ -1,34 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
-import { EditorView } from "@codemirror/view"; // ✅ White 테마 직접 생성하기 위한 import
+import { EditorView } from "@codemirror/view";
 
 // ✅ White 테마 직접 정의
 const whiteTheme = EditorView.theme({
-  "&": { backgroundColor: "white", color: "black" }, // ✅ 배경 흰색, 글씨 검정
-  ".cm-content": { caretColor: "black" }, // ✅ 커서 색상 검정
-  "&.cm-focused .cm-cursor": { borderLeftColor: "black" }, // ✅ 선택된 커서 색상 검정
-  "&.cm-focused .cm-selectionBackground, ::selection": { backgroundColor: "#d0d0d0" }, // ✅ 선택된 텍스트 배경 회색
+  "&": { backgroundColor: "white", color: "black" },
+  ".cm-content": { caretColor: "black" },
+  "&.cm-focused .cm-cursor": { borderLeftColor: "black" },
+  "&.cm-focused .cm-selectionBackground, ::selection": { backgroundColor: "#d0d0d0" },
 });
 
-const CodeEditor: React.FC = () => {
-  // ✅ 20줄의 빈 코드 초기화
-  const initialCode = Array(20).fill("").join("\n");
-  const [code, setCode] = useState(initialCode);
+// ✅ `props` 추가: `code` 상태를 부모 컴포넌트 (`ReviewPage.tsx`)에서 관리하도록 설정
+interface CodeEditorProps {
+  code: string;
+  setCode: (code: string) => void;
+}
 
+const CodeEditor: React.FC<CodeEditorProps> = ({ code, setCode }) => {
   return (
     <CodeMirror
       value={code}
-      onChange={(value) => setCode(value)}
-      extensions={[javascript(), whiteTheme]} // ✅ White 테마 적용
+      onChange={(value) => setCode(value)} // ✅ 부모 컴포넌트의 상태를 업데이트
+      extensions={[javascript(), whiteTheme]}
       basicSetup={{ lineNumbers: true }}
       style={{ 
-        height: "350px", // ✅ 높이를 조금 키워서 20줄이 잘 보이도록
+        height: "350px",
         fontSize: "14px",
         border: "1px solid #ddd",
         borderRadius: "5px",
-        backgroundColor: "#ffffff", // ✅ 완전히 흰색으로 설정
-        padding: "10px" // ✅ 코드 입력창 내부 패딩 추가
+        backgroundColor: "#ffffff",
+        padding: "10px"
       }}
     />
   );
