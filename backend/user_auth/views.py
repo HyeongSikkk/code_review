@@ -4,7 +4,7 @@ from rest_framework import status
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework.decorators import api_view
 from rest_framework_simplejwt.tokens import RefreshToken
-from review.views import getHistories
+from review.views import get_histories
 
 User = get_user_model()
 
@@ -40,7 +40,7 @@ def login(request):
     #user = get_user_model().objects.get(email=email)
     print(user, email, password)
     if user is not None:  # 인증이 성공했을 때
-      dataList= getHistories(user.id)
+      dataList= get_histories(user.id)
       return Response({
         "message": "login success",
         "user_id" : user.id,
