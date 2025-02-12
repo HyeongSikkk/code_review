@@ -3,24 +3,23 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import History from "./History.tsx";
 
 interface HistoryData {
-    id: Number;
-    problem_id: Number;
-    name: String;
+    id: number;
+    problem_id: number;
+    name: string;
     created_at: Date;
 }
 
 interface Props {
-    data: { [key: Number]: HistoryData[] };
+    data: [number, HistoryData[]][];  // 배열 형태로 변경
 }
-
 
 function HistoryTab({ data }: Props) {
     console.log(data);
     return (
         <Accordion activeIndex={0}>
-            {Object.keys(data).map((key) => (
-                <AccordionTab key={key} header={key}>
-                    {data[key].map((historyRow, index) => (
+            {data.map(([problem_id, historyList]) => (  // 배열 구조 분해 할당
+                <AccordionTab key={problem_id} header={problem_id}>
+                    {historyList.map((historyRow, index) => (
                         <History key={index} name={historyRow.name} />
                     ))}
                 </AccordionTab>
@@ -28,5 +27,6 @@ function HistoryTab({ data }: Props) {
         </Accordion>
     );
 }
+
 
 export default HistoryTab;

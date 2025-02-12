@@ -5,7 +5,7 @@ from datetime import datetime
 # Create your models here.
 class Problem(models.Model) :
     name= models.CharField(max_length=20)
-    title= models.CharField(max_length=20)
+    title= models.TextField()
     content= models.TextField()
     
 class History(models.Model) :

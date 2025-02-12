@@ -9,57 +9,24 @@ from user_auth.models import AlgoReviewUser
 from .input_source_precessing import get_the_url, get_info_img
 
 # Create your views here.
-# dataList 데이터는 없앨 예정
-dataList= {
-    "소수찾기": [
-        {
-            "type": 1,
-            "name": "알고리즘 풀이",
-        },
-        {
-            "type": 1,
-            "name": "알고리즘 풀이 2차",
-        },
-        {
-            "type": 2,
-            "name": "최적화 방법",
-        }
-    ],
-    "짝수찾기": [
-        {
-            "type": 2,
-            "name": "최적화 방법",
-        },
-    ],
-    "dfs 응용": [
-        {
-            "type": 1,
-            "name": "완전 멘붕...",
-        },
-        {
-            "type": 2,
-            "name": "그치만 해냈쥬?ㅋㅋ"
-        },
-        {
-          "type": 1,
-          "name": "dfs 응용 너무 어렵다"
-        },    
-    ],
-}
 
 def get_histories(user_id) :
-    global dataList
-    print(user_id)
     # 히스토리 불러오는 코드 부분, review app에 분리해야할 부분으로 생각되어짐, 일단 구현
-    histories = History.objects.filter(user_id=user_id).values('id', 'problem_id', 'name', 'created_at').order_by("created_at")
+    histories = History.objects.filter(user_id=user_id) \
+        .select_related("problem_id") \
+        .values("id", "problem_id", "problem_id__name", "name", "created_at") \
+        .order_by("-created_at")
+
+
+    print(histories)
     problem_dict_history_list= {}
     for history in histories :
     # 문제 아이디
-        problem_id= history["problem_id"]
-        if problem_id not in problem_dict_history_list :
-            problem_dict_history_list[problem_id]= [history]
+        problem_name= history["problem_id__name"]
+        if problem_name not in problem_dict_history_list :
+            problem_dict_history_list[problem_name]= [history]
         else :
-            problem_dict_history_list[problem_id].append(history)
+            problem_dict_history_list[problem_name].append(history)
               
     print(problem_dict_history_list)
     return problem_dict_history_list
@@ -93,8 +60,9 @@ def generate_review(request):
         # 처리 결과 다루기
         if problem_data["status"] == True :
             # 문제 생성, 이 부분은 수정해야할 수 있습니다. 리뷰 생성 실패 시 데이터 삭제를 고려해야할 수 있습니다.
+            name= problem_data["title"][:20]
             problem= Problem.objects.create(
-                name= problem_data["title"],
+                name= name,
                 title= problem_data["title"],
                 content= problem_data["description"]
             )
