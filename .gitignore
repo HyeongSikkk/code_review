@@ -1,6 +1,5 @@
 __pycache__/
 **/__pycache__/
 backend/venv/
-backend/backend/settings.py
 backend/backend/.env
 frontend/node_modules

@@ -3,13 +3,16 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import History from "./History.tsx";
 
 interface HistoryData {
-    type: Number;
+    id: Number;
+    problem_id: Number;
     name: String;
+    created_at: Date;
 }
 
 interface Props {
-    data: { [key: String]: HistoryData[] };
+    data: { [key: Number]: HistoryData[] };
 }
+
 
 function HistoryTab({ data }: Props) {
     console.log(data);
