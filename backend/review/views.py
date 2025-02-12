@@ -22,11 +22,11 @@ def get_histories(user_id) :
     problem_dict_history_list= {}
     for history in histories :
     # 문제 아이디
-        problem_id= history["problem_id__name"]
-        if problem_id not in problem_dict_history_list :
-            problem_dict_history_list[problem_id]= [history]
+        problem_name= history["problem_id__name"]
+        if problem_name not in problem_dict_history_list :
+            problem_dict_history_list[problem_name]= [history]
         else :
-            problem_dict_history_list[problem_id].append(history)
+            problem_dict_history_list[problem_name].append(history)
               
     print(problem_dict_history_list)
     return problem_dict_history_list
