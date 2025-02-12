@@ -6,13 +6,14 @@ import UrlOrFileUploader from "../components/UrlOrFileUploader";
 import CodeEditor from "../components/CodeEditor";
 import { useLocation } from "react-router-dom";
 import Feedback from "../components/Feedback";
-import { sendReviewRequest } from "../api/ReviewRequestApi"; // ✅ 통합된 API 호출
+import { sendReviewRequest } from "../api/ReviewRequestApi"; // ✅ API 호출 함수
 
 const ReviewPage: React.FC = () => {
   const [code, setCode] = useState<string>(""); // ✅ 코드 입력 상태
-  const [reviewResult, setReviewResult] = useState<any>(null); // ✅ 서버 응답 전체 저장 (history_id, problem_info, reviews 포함)
+  const [reviewResult, setReviewResult] = useState<any>(null); // ✅ 서버 응답 저장
+  const [highlightedLines, setHighlightedLines] = useState<{ start: number; end: number; colorIndex: number }[]>([]); // ✅ Highlight할 라인 상태 추가
   const [inputSource, setInputSource] = useState<string | null>(null); // ✅ "url" 또는 "img"
-  const [inputData, setInputData] = useState<string | null>(null); // ✅ URL 또는 Base64 인코딩된 이미지 데이터
+  const [inputData, setInputData] = useState<string | null>(null); // ✅ URL 또는 Base64 변환된 이미지 데이터
 
   const location = useLocation();
   const userId = location.state?.userId || localStorage.getItem("user_id");
@@ -39,7 +40,7 @@ const ReviewPage: React.FC = () => {
       input_data: inputData, // URL 또는 Base64 인코딩된 이미지 데이터
       problem_info: null,
       source_code: code, // 사용자가 입력한 코드
-      reviews: [], // 빈 리스트 (서버에서 처리)
+      reviews: [],
       user_id: {userId},
     };
 
@@ -48,6 +49,16 @@ const ReviewPage: React.FC = () => {
     try {
       const response = await sendReviewRequest(requestData);
       setReviewResult(response); // ✅ 전체 응답 데이터 저장
+
+      // ✅ Highlight할 라인 정보 저장
+      if (response.reviews) {
+        const highlights = response.reviews.map((review: any, index: number) => ({
+          start: review.start_line_number,
+          end: review.end_line_number,
+          colorIndex: index, // ✅ 색상 인덱스 추가 (순환 적용)
+        }));
+        setHighlightedLines(highlights);
+      }
     } catch (error) {
       console.error("❌ Error sending review request:", error);
     }
@@ -65,11 +76,11 @@ const ReviewPage: React.FC = () => {
       <div className="code-container" style={{ display: "flex" }}>
         <Card className="code-input" style={{ flex: 1, minWidth: "400px" }}>
           <h3>Enter Your Code</h3>
-          <CodeEditor code={code} setCode={setCode} />
+          <CodeEditor code={code} setCode={setCode} highlights={highlightedLines} /> {/* ✅ Highlight 데이터 전달 */}
         </Card>
 
         <Card className="code-output">
-          <Feedback reviewResult={reviewResult?.reviews || []} /> {/* ✅ 응답 데이터에서 `reviews[]`만 전달 */}
+          <Feedback reviewResult={reviewResult?.reviews || []} />
         </Card>
       </div>
 
