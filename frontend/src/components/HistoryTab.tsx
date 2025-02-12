@@ -17,8 +17,8 @@ function HistoryTab({ data }: Props) {
     console.log(data);
     return (
         <Accordion activeIndex={0}>
-            {data.map(([problemId, historyList]) => (  // 배열 구조 분해 할당
-                <AccordionTab key={problemId} header={problemId.toString()}>
+            {data.map(([problem_id, historyList]) => (  // 배열 구조 분해 할당
+                <AccordionTab key={problem_id} header={problem_id}>
                     {historyList.map((historyRow, index) => (
                         <History key={index} name={historyRow.name} />
                     ))}
