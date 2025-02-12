@@ -40,6 +40,7 @@ const ReviewPage: React.FC = () => {
       problem_info: null,
       source_code: code, // 사용자가 입력한 코드
       reviews: [], // 빈 리스트 (서버에서 처리)
+      user_id: {userId},
     };
 
     console.log("📡 Sending Review Request:", requestData);
