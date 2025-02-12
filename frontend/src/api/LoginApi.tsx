@@ -3,6 +3,7 @@ import BaseApi from "./BaseApi";
 interface Props {
     email: string;
     password: string;
+    error?: string;
 }
 
 const url = "/v1/user/login/";
