@@ -4,6 +4,7 @@ import { InputText } from "primereact/inputtext";
 import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload"; // ✅ FileUploadSelectEvent 추가
 
 interface UrlOrFileUploaderProps {
+<<<<<<< HEAD
   setInputSource: (source: "url" | "img") => void;
   setInputData: (data: string | null) => void;
 }
@@ -32,6 +33,20 @@ const UrlOrFileUploader: React.FC<UrlOrFileUploaderProps> = ({ setInputSource, s
       };
       reader.readAsDataURL(file);
     }
+=======
+  setInputSource: React.Dispatch<React.SetStateAction<"url" | "image">>; // ✅ Props 추가
+  setInputData: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const UrlOrFileUploader: React.FC<UrlOrFileUploaderProps> = ({ setInputSource, setInputData }) => {
+  const [activeInput, setActiveInput] = useState<"url" | "file" | null>(null);
+  const [url, setUrl] = useState("");
+
+  // ✅ URL 입력 시 부모 컴포넌트에 데이터 전달
+  const handleUrlSubmit = () => {
+    setInputSource("url");
+    setInputData(url);
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
   };
 
   return (
@@ -41,25 +56,50 @@ const UrlOrFileUploader: React.FC<UrlOrFileUploaderProps> = ({ setInputSource, s
         <Button 
           label="URL 입력" 
           icon="pi pi-link" 
+<<<<<<< HEAD
           onClick={() => setActiveInput("url")} 
+=======
+          onClick={() => setActiveInput(activeInput === "url" ? null : "url")} 
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
           className="p-button-primary p-button-sm w-8rem"
         />
         <Button 
           label="이미지 선택" 
           icon="pi pi-image" 
+<<<<<<< HEAD
           onClick={() => setActiveInput("img")} 
+=======
+          onClick={() => setActiveInput(activeInput === "file" ? null : "file")} 
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
           className="p-button-secondary p-button-sm w-8rem"
         />
       </div>
 
       {/* ✅ URL 입력 필드 */}
       {activeInput === "url" && (
+<<<<<<< HEAD
         <InputText 
           value={url} 
           onChange={handleUrlChange} 
           placeholder="이미지 URL 입력" 
           className="w-16rem p-inputtext-sm"
         />
+=======
+        <div className="flex align-items-center gap-2">
+          <InputText 
+            value={url} 
+            onChange={(e) => setUrl(e.target.value)} 
+            placeholder="이미지 URL 입력" 
+            className="w-16rem p-inputtext-sm"
+          />
+          <Button 
+            label="확인" 
+            icon="pi pi-check" 
+            onClick={handleUrlSubmit} // ✅ URL 입력 데이터 부모로 전달
+            className="p-button-success p-button-sm w-6rem"
+          />
+        </div>
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
       )}
 
       {/* ✅ 파일 업로드 */}
@@ -68,15 +108,32 @@ const UrlOrFileUploader: React.FC<UrlOrFileUploaderProps> = ({ setInputSource, s
           mode="basic" 
           chooseLabel="파일 선택" 
           accept="image/*" 
+<<<<<<< HEAD
           customUpload={true} // ✅ 사용자 정의 업로드 방식 사용
           className="p-button-sm w-16rem"
           onSelect={handleFileUpload} // ✅ 타입 오류 해결 (FileUploadSelectEvent 사용)
+=======
+          customUpload={true}
+          className="p-button-sm w-16rem"
+          onSelect={(e) => {
+            const file = e.files?.[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = () => {
+                setInputSource("image");
+                setInputData(reader.result as string); // ✅ 이미지 데이터 부모 컴포넌트에 전달
+              };
+              reader.readAsDataURL(file);
+            }
+          }}
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
         />
       )}
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default UrlOrFileUploader;
 
 // import React, { useState } from "react";
@@ -138,3 +195,6 @@ export default UrlOrFileUploader;
 // };
 
 // export default UrlOrFileUploader;
+=======
+export default UrlOrFileUploader;
+>>>>>>> 9f8cf4f6c06afa86bcbccd314736b858093e583a
