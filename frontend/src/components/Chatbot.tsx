@@ -8,7 +8,7 @@ interface ChatbotProps {
   onClose: () => void; // ✅ 부모에서 챗봇 닫기 기능 전달
 }
 
-const Chatbot: React.FC = () => {
+const Chatbot: React.FC<ChatbotProps> = () => {
   const [chatMessages, setChatMessages] = useState<{ sender: string; text: string }[]>([]);
   const [userInput, setUserInput] = useState<string>("");
   const scrollRef = useRef<any>(null); // ✅ useRef의 타입을 any로 변경
